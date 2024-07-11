@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->uuid('customer_id')->primary();
             $table->string('name');
-            $table->string('sex', 50)->nullable();
+            // $table->string('sex', 50)->nullable();
+            $table->addColumn('gender', 'gender')->nullable();
             $table->string('email')->nullable();
             $table->string('phone_number', 50)->nullable();
-            $table->json('sales_order_information')->nullable();
             $table->text('address')->nullable();
-            $table->string('type', 100)->nullable();
             $table->text('note')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->json('tags')->nullable();
             $table->timestamps();
 
             $table->foreignUuid('user_id')->nullable()->constrained('users', 'user_id')->onDelete('restrict');

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,6 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Grammar::macro('typeVarchar_array', function () {
+            return 'character varying[]';
+        });
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('product_id')->primary();
             $table->foreignUuid('category_id')->nullable()->constrained('categories', 'category_id')->onDelete('set null');
@@ -24,19 +28,13 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('sale_price')->default(0);
             $table->unsignedInteger('purchase_price')->default(0);
-            $table->json('details')->nullable();
-            $table->json('optional_details')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('status', 50)->nullable();
-            $table->json('images')->nullable();
-            $table->json('tags')->nullable();
-            $table->foreignUuid('user_id')->constrained('users', 'user_id')->onDelete('restrict');
+            $table->foreignUuid('user_id')->nullable()->constrained('users', 'user_id')->onDelete('restrict');
 
             // Check constraints
             $table->timestamps();
         });
 
-        if (env('DB_CONNECTION') !== 'pgsql') return;
 
         DB::statement('ALTER TABLE IF EXISTS products ADD CHECK (current_stock >= 0)');
         DB::statement('ALTER TABLE IF EXISTS products ADD CHECK (min_stock >= 0)');

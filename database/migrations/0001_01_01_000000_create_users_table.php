@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Support\Fluent;
 
 return new class extends Migration
 {
@@ -11,6 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        DB::statement('DROP TYPE IF EXISTS user_role');
+        DB::statement('DROP TYPE IF EXISTS gender');
+        DB::statement("CREATE TYPE user_role AS ENUM ('admin', 'staff')");
+        DB::statement("CREATE TYPE gender AS ENUM ('male', 'female', 'other')");
+        Grammar::macro('typeUserRole', fn () =>  'user_role');
+        Grammar::macro('typeGender', fn () =>  'gender');
+        // Grammar::macro('typeUserRole', function () {
+        //     return 'user_role';
+        // });
+
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('user_id')->primary();
 
@@ -20,9 +32,11 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->json('contact');
+            $table->addColumn('gender', 'gender')->nullable();
+            $table->string('phone_number', 20);
             $table->string('profile_image', 255)->nullable();
-            $table->string('role', 100);
+            // $table->string('role', 100);
+            $table->addColumn('userRole', 'role');
             $table->boolean('is_active')->default(true);
             $table->text('address')->nullable();
             $table->text('note')->nullable();
@@ -54,5 +68,8 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+
+        DB::statement('DROP TYPE IF EXISTS user_role');
+        DB::statement('DROP TYPE IF EXISTS gender');
     }
 };

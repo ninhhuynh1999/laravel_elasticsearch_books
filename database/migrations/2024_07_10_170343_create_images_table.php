@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locations', function (Blueprint $table) {
-            $table->uuid('location_id')->primary();
-            $table->string('name');
-            $table->json('contact');
-            $table->text('address');
-            $table->foreignUuid('user_id')->constrained('users', 'user_id')->onDelete('restrict');
+        Schema::create('images', function (Blueprint $table) {
+            $table->uuid('image_id')->primary();
+            $table->text('url');
+            // $table->morphs('imageable');
+            $table->string('model_type');
+            $table->uuid('model_id');
             $table->timestamps();
+
+            $table->index(['model_type', 'model_id']);
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('images');
     }
 };

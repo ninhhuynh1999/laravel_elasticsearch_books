@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->uuid('supplier_id')->primary();
             $table->string('name', 255);
-            $table->json('contact')->nullable();
+            $table->string('email')->nullable();
             $table->text('address')->nullable();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->uuid('category_id')->primary();
-            $table->string('name', 255);
+            $table->string('name', 255)->unique();
             $table->text('text');
             $table->uuid('user_id')->nullable();
             // Foreign key constraint

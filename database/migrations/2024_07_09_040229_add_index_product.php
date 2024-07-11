@@ -15,14 +15,6 @@ return new class extends Migration
             $table->index('category_id', 'idx_product_category');
             $table->index('supplier_id', 'idx_product_supplier');
         });
-
-        Schema::table('sale_orders', function (Blueprint $table) {
-            $table->index('customer_id', 'idx_sales_order_customer');
-        });
-
-        Schema::table('return_orders', function (Blueprint $table) {
-            $table->index('sales_order_id', 'idx_return_order_sales_order');
-        });
     }
 
     /**
