@@ -14,15 +14,17 @@ class Customer extends Model
 
     protected $fillable = [
         'name',
-        'sex',
+        'gender',
         'email',
         'phone_number',
-        'sales_order_information',
         'address',
-        'type',
         'note',
         'is_active',
-        'tags',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'user_id');
+    }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Traits\RecordSignature;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, RecordSignature, HasUuids;
+    use HasFactory, Notifiable, HasUuids;
 
 
     protected $primaryKey = 'user_id';
@@ -26,7 +25,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'contact',
+        'gender',
+        'phone_number',
         'profile_image',
         'role',
         'is_active',
@@ -55,5 +55,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'user_id');
+    }
+    
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'user_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
+
+    public function suppliers()
+    {
+        return $this->hasMany(Supplier::class, 'user_id');
     }
 }
