@@ -9,8 +9,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "babenkoivan/elastic-scout-driver": "^4.0",
+        "babenkoivan/elastic-scout-driver-plus": "^5.0",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.10",
+        "laravel/telescope": "^5.1",
+        "laravel/tinker": "^2.9",
+        "php-open-source-saver/jwt-auth": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
