@@ -7,7 +7,6 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

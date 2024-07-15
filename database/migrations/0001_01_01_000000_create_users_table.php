@@ -33,7 +33,7 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->addColumn('gender', 'gender')->nullable();
-            $table->string('phone_number', 20);
+            $table->string('phone_number', 20)->nullable();
             $table->string('profile_image', 255)->nullable();
             // $table->string('role', 100);
             $table->addColumn('userRole', 'role');

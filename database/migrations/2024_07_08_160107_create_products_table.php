@@ -12,9 +12,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Grammar::macro('typeVarchar_array', function () {
-            return 'character varying[]';
-        });
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('product_id')->primary();
             $table->foreignUuid('category_id')->nullable()->constrained('categories', 'category_id')->onDelete('set null');
