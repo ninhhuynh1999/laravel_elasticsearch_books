@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('product_id')->primary();
-            $table->foreignUuid('category_id')->nullable()->constrained('categories', 'category_id')->onDelete('set null');
+            $table->foreignId('category_id')->nullable()->constrained('categories', 'category_id')->onDelete('set null');
             $table->foreignUuid('supplier_id')->constrained('suppliers', 'supplier_id')->onDelete('restrict');
             $table->string('barcode')->unique()->nullable();
             $table->string('sku')->unique()->nullable();

@@ -16,20 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        //     'role' => 'admin',
-        // ]);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'role' => 'admin',
+        ]);
+        User::factory(10)->create();
+
         $this->generateDefaultCategories();
 
-        User::factory(10)->create();
-        Category::factory(10)->create();
-        Supplier::factory(10)->create();
-        Supplier::factory(10)->userUpdated()->create();
-        Customer::factory(10)->create();
-        Customer::factory(10)->userUpdated()->create();
-        Product::factory(10)->create();
+        Supplier::factory(20)->create();
+        Product::factory(100)->create();
     }
 
     public function generateDefaultCategories()
