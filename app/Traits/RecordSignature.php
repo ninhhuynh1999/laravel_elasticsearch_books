@@ -9,12 +9,10 @@ trait RecordSignature
         parent::boot();
 
         static::updating(function ($model) {
-
             $model->modified_by = \Auth::User()->id;
         });
 
         static::creating(function ($model) {
-
             $model->created_by = \Auth::User()->id;
         });
     }
