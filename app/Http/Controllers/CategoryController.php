@@ -7,15 +7,8 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CategoryController extends Controller implements HasMiddleware
+class CategoryController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            'auth:api',
-        ];
-    }
-
     public function index(Request $request)
     {
         $categories = Category::all();
